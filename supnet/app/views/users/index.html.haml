@@ -1,0 +1,10 @@
+%h1{style: "margin-bottom: 40px;"}
+  Users
+  -# %span{style: "margin: -10px 0 10px 50px;"}
+  -#   = link_to "New Portfolio", new_portfolio_path, class: "btn btn-primary"
+
+%table{id: "portfolios", class: "table table-hover"}
+  - @users.each do |user|
+    %tr
+      %td
+        &nbsp;&nbsp;&nbsp;&nbsp; #{link_to user.name, user}

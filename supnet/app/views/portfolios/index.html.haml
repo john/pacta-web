@@ -1,0 +1,10 @@
+%h1{style: "margin-bottom: 40px;"}
+  Portfolios
+  %span{style: "margin: -10px 0 10px 50px;"}
+    = link_to "New Portfolio", new_portfolio_path, class: "btn btn-primary"
+
+%table{id: "portfolios", class: "table table-hover"}
+  - @portfolios.each do |portfolio|
+    %tr
+      %td
+        &nbsp;&nbsp;&nbsp;&nbsp; #{link_to portfolio.name, portfolio}

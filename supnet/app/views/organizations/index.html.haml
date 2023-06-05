@@ -1,0 +1,11 @@
+%h1{style: "margin-bottom: 40px;"}
+  Organizations
+  %span{style: "margin: -10px 0 10px 50px;"}
+    = link_to "New Organization", new_organization_path, class: "btn btn-primary"
+
+
+%table{id: "organizations", class: "table table-hover"}
+  - @organizations.each do |organization|
+    %tr
+      %td
+        &nbsp;&nbsp;&nbsp;&nbsp; #{link_to organization.name, organization}

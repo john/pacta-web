@@ -1,0 +1,33 @@
+%h1
+  = @report.name
+
+.p.small
+  %i
+    irl these get created by a service and sent to the app, they're probably a PDF
+    accompanied by some metadata.
+  %br/
+  %br/
+
+%p
+  %b Report for:
+  = link_to @report.portfolio.name, @report.portfolio
+
+- if @report.report_file.present?
+  %div{style: "margin-top: 20px;"}
+    Generated file
+  %div
+    = link_to @report.report_file.blob.filename, rails_blob_path(@report.report_file, disposition: 'attachment')
+- else
+  %div{style: "margin-top: 20px;"}
+    %i
+      No uploaded CSV, can't run reports
+%br/
+%br/
+
+.btn-toolbar{role: "toolbar", "aria-label": "Toolbar with button groups"}
+  = link_to "Edit", edit_report_path(@report), class: "btn btn-outline-primary btn-sm"
+  &nbsp;
+  = button_to "Destroy this report", @report, method: :delete, class: "btn btn-outline-danger btn-sm", onclick: "return confirm('Estas seguro? This will also destroy all PCFs associated with this report.');"
+
+%br/
+%br/

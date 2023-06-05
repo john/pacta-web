@@ -1,0 +1,15 @@
+%div{:id => "#{dom_id product}"}
+  - product.attributes.each do |attribute|
+    - unless attribute[0].in?(['id', 'company_name', 'product_name_company'])
+      %div
+        %strong
+          - unless attribute[0] == 'vendor_id'
+            #{attribute[0].humanize}:
+
+        - if attribute[0] == 'vendor_id'
+          - if product.vendor.present?
+            = link_to product.vendor.name, product.vendor
+        - elsif attribute[0] == 'created_at' || attribute[0] == 'created'
+          = attribute[1].strftime("%b %-d, %Y, at %-I:%M%P")
+        - else
+          = attribute[1]

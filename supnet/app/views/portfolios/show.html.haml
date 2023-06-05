@@ -1,0 +1,55 @@
+%div
+  Portfolio
+
+%h1
+  = @portfolio.name
+
+- if @portfolio.uploaded_file.present?
+  %div{style: "margin-top: 20px;"}
+    Uploaded portfolio
+  %div
+    = link_to @portfolio.uploaded_file.blob.filename, rails_blob_path(@portfolio.uploaded_file, disposition: 'attachment')
+- else
+  %div{style: "margin-top: 20px;"}
+    %i
+      No uploaded portfolio, can't run reports
+
+%div{style: "margin-top: 20px;"}
+  Description:
+  = @portfolio.description
+
+%div{style: "margin-top: 20px;"}
+  Belongs to: #{link_to @portfolio.organization.name, @portfolio.organization}
+%div
+  Uploaded by: #{@portfolio.user.name}
+%div
+  Status:
+  = @portfolio.status
+
+-# This is behavior the opposite of expected?
+- if @portfolio.uploaded_file.present?
+
+  %div{style: "margin-top: 20px;"}
+    -# POST to reports_path
+    = button_to "Run a report on this portfolio", reports_path(report: {name: 'foo'}, portfolio_id: @portfolio.id), method: :post, class: "btn btn-primary"
+
+  %div{style: "margin-top: 20px;"}
+    - if @portfolio.reports.present?
+      %b Reports:
+      %ul
+        - @portfolio.reports.each do |report|
+          %li{style: "margin-top: 5px;"}
+            #{link_to report.name, report}, #{report.created_at}
+    - else
+      %i
+        No reports have yet been run.
+
+%br/
+
+.btn-toolbar{role: "toolbar", "aria-label": "Toolbar with button groups"}
+  = link_to "Edit", edit_portfolio_path(@portfolio), class: "btn btn-outline-primary btn-sm"
+  &nbsp;
+  = button_to "Destroy this portfolio", @portfolio, method: :delete, class: "btn btn-outline-danger btn-sm", onclick: "return confirm('Estas seguro? This will also destroy all reports associated with this portfolio.');"
+
+%br/
+%br/

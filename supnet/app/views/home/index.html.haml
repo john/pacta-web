@@ -1,0 +1,16 @@
+:css
+  a {text-decoration: none}
+
+.container
+  .row
+    .col-sm-8
+      %h2{style: "margin: 45px 0 35px 0;"}
+        Upload Portfolios
+        .small.text-muted
+          and run PACTA reports on them.
+
+      %p
+        This is the webapp, it's designed to call a report generating service,
+        which is presumed to be the existing PACTA process running elsewhere as an API.
+        Since that hasn't been wrapped in an API yet, right now it calls a stub API
+        and generates a one-page placard PDF.

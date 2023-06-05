@@ -1,0 +1,14 @@
+%h1{style: "margin-bottom: 40px;"}
+  Your Reports
+  %span{style: "margin: -10px 0 10px 50px;"}
+    %i.small{style: "font-size: 11px;"}
+      eventually a 'new report' button here and you pick the portfolio
+    -# = link_to "New Report", new_report_path, class: "btn btn-primary"
+
+%table{id: "reports", class: "table table-hover"}
+  - @reports.each do |report|
+    %tr
+      %td{style: "padding-right: 25px;"}
+        =link_to report.name, report
+
+%br

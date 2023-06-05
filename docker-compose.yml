@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+
+  pacta:
+    build:
+      context: .
+    volumes:
+      - ./supnet:/opt/app
+    links:
+      - pacta-db
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+
+  pacta-db:
+    image: postgres:15.2
+    environment:
+      POSTGRES_USER: pacta
+      POSTGRES_PASSWORD: test_db_password
+    ports:
+      - '6542:5432'
+    volumes:
+      - pacta-db:/var/lib/postgresql/data
+
+volumes:
+  pacta-db:
+  pacta:
