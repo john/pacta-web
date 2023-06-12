@@ -4,8 +4,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :update_allowed_parameters, if: :devise_controller?
+  before_action :check_locale
 
   protected
+
+  def check_locale
+    if request.query_parameters.include?(:locale)
+      I18n.locale = params[:locale].to_sym
+    end
+  end
 
   def require_admin
     unless current_user.admin?

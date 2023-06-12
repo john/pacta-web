@@ -1,10 +1,19 @@
 - @mode = "light"
-- @company = user_signed_in? ? "PACTA for #{current_user.organization.name}" : "PACTA"
-- @color = @color.present? ? @color : "bg-secondary"
+- @company = user_signed_in? ? "PACTA #{t('for')} #{current_user.organization.name}" : "PACTA"
+-# - @color = @color.present? ? @color : "bg-secondary"
 
 !!!
-%html{lang: "en", "data-bs-theme": "#{@mode}"}
+%html{lang: "#{I18n.locale}", "data-bs-theme": "#{@mode}"}
   %head
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8YEGVSF9X8"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '#{ENV['GA_CODE']}');
+    </script>
+
     %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}/
     %meta{content: "width=device-width,initial-scale=1", name: "viewport"}/
     %title
@@ -22,15 +31,20 @@
       .form-group {margin-bottom: 20px;}
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+3:400, 700" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   %body
 
     %nav{class: "navbar navbar-expand-md navbar-dark #{@color}"}
       .container-fluid
+        %img{src: "rmi_logo_stacked_tag_white.svg", style: "width: 40px; margin-left: 20px;"}
 
-
-        = link_to "#{@company}", root_path, class: "navbar-brand", style: "margin-left: 25px;"
+        = link_to "#{@company} (#{I18n.locale})", root_path, class: "navbar-brand", style: "margin-left: 25px;"
 
         %button.navbar-toggler{type: "button", "data-bs-toggle": "collapse", "data-bs-target": "#navbarSupportedContent", style: "margin-right: 20px;", "aria-controls": "navbarSupportedContent", "aria-expanded": "false", "aria-label": "Toggle navigation"}
           %span.navbar-toggler-icon
@@ -38,25 +52,25 @@
         .collapse.navbar-collapse#navbarSupportedContent
           %ul.navbar-nav.me-auto
             %li.nav-item
-              = link_to "Portfolios", portfolios_path, class: "nav-link"
+              = link_to t('portfolio'), portfolios_path, class: "nav-link"
 
           %ul.navbar-nav.ms-auto{style: "margin-right: 20px;"}
             - if user_signed_in?
               %li.nav-item.dropdown
-                = link_to "Hi #{current_user.name}!", '#', class: "nav-link dropdown-toggle", role: "button", "data-bs-toggle": "dropdown", "aria-expanded": "false"
+                = link_to "#{t('hello')}  #{current_user.name}!", '#', class: "nav-link dropdown-toggle", role: "button", "data-bs-toggle": "dropdown", "aria-expanded": "false"
                 %ul.dropdown-menu
                   %li
-                    =link_to "Profile", current_user, class: "dropdown-item"
+                    =link_to t('profile'), current_user, class: "dropdown-item"
                   - if current_user.admin?
                     %li
                       = link_to "Admin", "/admin", class: "dropdown-item"
 
               %li.nav-item
-                = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-item nav-link'
+                = link_to t('sign_out'), destroy_user_session_path, method: :delete, class: 'nav-item nav-link'
 
             - else
               %li{class: "nav-item"}
-                = link_to 'Sign In', new_user_session_path, class: 'nav-link'
+                = link_to t('sign_in'), new_user_session_path, class: 'nav-link'
 
     %main{role: "main", class: "container", style: "margin-top: 25px;"}
 

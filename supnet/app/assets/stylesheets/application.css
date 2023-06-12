@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+    font-family:  "Source Sans 3", sans-serif !important;
+ }
+
+ h1 {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+ }
+
+ h2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: medium;
+ }
+
+ h3 h4 h5 {
+    font-family: "Roboto", sans-serif;
+ }
+
+.navbar {
+    background-color: #003B63 !important;
+}

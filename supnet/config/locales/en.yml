@@ -30,4 +30,17 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: "Hi"
+  for: "for"
+  sign_in: "Sign in"
+  sign_out: "Sign out"
+  profile: "Profile"
+  portfolio: "Portfolio"
+
+es:
+  hello: "Hola"
+  for: "por"
+  sign_in: "Iniciar sesión"
+  sign_out: "Cerrar sesión"
+  profile: "Perfil"
+  portfolio: "Portafolio"

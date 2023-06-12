@@ -13,19 +13,21 @@ This repo creates two containers, one running a postgres DB, the other a Rails a
 
 1. Install Docker
 
-3. Clone this repo
+2. Clone this repo
 ```
 git clone https://github.com/john/pacta.git
 ```
 
-4. cd into repo and build images. The app was originally name supnet and the Rails app retains that name; until that gets changed (soon) the volume needs to retain it.
+3. cd into repo and build images. The app was originally name supnet and the Rails app retains that name; until that gets changed (soon) the volume needs to retain it.
 
 ```
-cd pacta
+cd pacta-web
 
 docker volume create --name pacta-db
 docker volume create --name supnet
 ```
+
+4. Copy the .env.example file, rename the copy .env, and update the values. If you create a Google Analystics tag and put it in GA_CODE, it will track user/visits/etc.
 
 5. Initialize:
 
@@ -40,7 +42,7 @@ docker ps
 ```
 
 ```
-docker exec -t -i pacta-pacta-1 /bin/bash
+docker exec -t -i pacta-web-pacta-1 /bin/bash
 ```
 
 7. After building for the first time you'll see you need to create the databases. In a separate terminal run:
